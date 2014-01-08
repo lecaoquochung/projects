@@ -46,6 +46,16 @@
 			<?php echo h($recruitsFix['RecruitsFix']['name']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Title'); ?></dt>
+		<dd>
+			<?php echo h($recruitsFix['RecruitsFix']['title']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Description'); ?></dt>
+		<dd>
+			<?php echo h($recruitsFix['RecruitsFix']['description']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Intro Title'); ?></dt>
 		<dd>
 			<?php echo h($recruitsFix['RecruitsFix']['intro_title']); ?>

@@ -11,6 +11,8 @@
 			<th><?php echo $this->Paginator->sort('is_explanatorymeeting'); ?></th>
 			<th><?php echo $this->Paginator->sort('workstatus'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('title'); ?></th>
+			<th><?php echo $this->Paginator->sort('description'); ?></th>
 			<th><?php echo $this->Paginator->sort('intro_title'); ?></th>
 			<th><?php echo $this->Paginator->sort('intro_detail'); ?></th>
 			<th><?php echo $this->Paginator->sort('point_title'); ?></th>
@@ -169,6 +171,8 @@
 		<td><?php echo h($recruitsFix['RecruitsFix']['is_explanatorymeeting']); ?>&nbsp;</td>
 		<td><?php echo h($recruitsFix['RecruitsFix']['workstatus']); ?>&nbsp;</td>
 		<td><?php echo h($recruitsFix['RecruitsFix']['name']); ?>&nbsp;</td>
+		<td><?php echo h($recruitsFix['RecruitsFix']['title']); ?>&nbsp;</td>
+		<td><?php echo h($recruitsFix['RecruitsFix']['description']); ?>&nbsp;</td>
 		<td><?php echo h($recruitsFix['RecruitsFix']['intro_title']); ?>&nbsp;</td>
 		<td><?php echo h($recruitsFix['RecruitsFix']['intro_detail']); ?>&nbsp;</td>
 		<td><?php echo h($recruitsFix['RecruitsFix']['point_title']); ?>&nbsp;</td>

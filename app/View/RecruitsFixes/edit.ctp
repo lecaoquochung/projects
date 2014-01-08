@@ -12,6 +12,8 @@
 		echo $this->Form->input('is_explanatorymeeting');
 		echo $this->Form->input('workstatus');
 		echo $this->Form->input('name');
+		echo $this->Form->input('title');
+		echo $this->Form->input('description');
 		echo $this->Form->input('intro_title');
 		echo $this->Form->input('intro_detail');
 		echo $this->Form->input('point_title');
