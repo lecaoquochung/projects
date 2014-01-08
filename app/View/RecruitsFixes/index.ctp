@@ -13,15 +13,15 @@
 			<!-- <th class="actions"><?php echo __('Actions'); ?></th> -->
 	</tr>
 	<?php foreach ($recruitsFixes as $recruitsFix): ?>
-	<tr>
+	<tr id="<?php echo h($recruitsFix['RecruitsFix']['id']); ?>">
 		<td><?php echo h($recruitsFix['RecruitsFix']['id']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['name']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['title']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['description']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['intro_title']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['intro_detail']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['office_name']); ?></td>
-		<td><?php echo h($recruitsFix['RecruitsFix']['office_name_kana']); ?></td>
+		<td class="edit_inline" name="name" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['name']); ?></td>
+		<td class="edit_inline" name="title" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['title']); ?></td>
+		<td class="edit_inline" name="description" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['description']); ?></td>
+		<td class="edit_inline" name="intro_title" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['intro_title']); ?></td>
+		<td class="edit_inline" name="intro_detail" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['intro_detail']); ?></td>
+		<td class="edit_inline" name="office_name" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['office_name']); ?></td>
+		<td class="edit_inline" name="office_name_kana" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['office_name_kana']); ?></td>
 		<!-- <td class="actions">
 			<?php #echo $this->Html->link(__('View'), array('action' => 'view', $recruitsFix['RecruitsFix']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $recruitsFix['RecruitsFix']['id'])); ?>
@@ -50,3 +50,24 @@
 		<!-- <li><?php echo $this->Html->link(__('New Recruits Fix'), array('action' => 'add')); ?></li> -->
 	</ul>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.edit_inline').click(function(){
+			if($(this).find('#edit_inline').size()==0){
+				$(this).html('<textarea id="edit_inline" style="width:100%;height:100%">'+$(this).html()+'</textarea>');			
+				$(this).find('#edit_inline').focus().blur(function(){					
+					var obj = $(this);
+					obj.parents('td').append('<img src="<?php echo $this->webroot ?>img/loading.gif" alt="" style="position: absolute;" />');
+					$.ajax({
+						url: "<?php echo $this->webroot ?>RecruitsFixes/edit_ajax",
+						data:{field:obj.parents('td').attr('name'),value:obj.html(),id:obj.parents('tr').attr('id')},
+						type: 'post',
+						success: function(data){
+							obj.parents('td').html(obj.val());							
+						}
+					});
+				})				;				
+			}
+		})		
+	})
+</script>

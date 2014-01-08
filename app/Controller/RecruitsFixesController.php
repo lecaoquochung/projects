@@ -59,6 +59,18 @@ class RecruitsFixesController extends AppController {
 	}
 
 /**
+ * edit ajax method
+ *
+ * @return void
+ */
+	public function edit_ajax() {
+		$this->autoRender = false;
+		Configure::write('debug', 0);
+		$this->RecruitsFix->id = $this->request->data['id'];
+		$this->RecruitsFix->saveField($this->request->data['field'], $this->request->data['value']);
+	}	
+	
+/**
  * edit method
  *
  * @throws NotFoundException
