@@ -22,6 +22,7 @@ class RecruitsFixesController extends AppController {
  */
 	public function index() {
 		$this->RecruitsFix->recursive = 0;
+        $this->paginate = array('limit' => 1000, 'order' => array('id' => 'desc'),);
 		$this->set('recruitsFixes', $this->Paginator->paginate());
 	}
 
