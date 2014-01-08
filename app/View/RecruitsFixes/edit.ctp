@@ -1,0 +1,169 @@
+<div class="recruitsFixes form">
+<?php echo $this->Form->create('RecruitsFix'); ?>
+	<fieldset>
+		<legend><?php echo __('Edit Recruits Fix'); ?></legend>
+	<?php
+		echo $this->Form->input('id');
+		echo $this->Form->input('plan_code');
+		echo $this->Form->input('plan_group_code');
+		echo $this->Form->input('company_id');
+		echo $this->Form->input('jobcodes');
+		echo $this->Form->input('is_beginner');
+		echo $this->Form->input('is_explanatorymeeting');
+		echo $this->Form->input('workstatus');
+		echo $this->Form->input('name');
+		echo $this->Form->input('intro_title');
+		echo $this->Form->input('intro_detail');
+		echo $this->Form->input('point_title');
+		echo $this->Form->input('point_detail');
+		echo $this->Form->input('invite_job');
+		echo $this->Form->input('detail');
+		echo $this->Form->input('apply_condition');
+		echo $this->Form->input('place');
+		echo $this->Form->input('pay');
+		echo $this->Form->input('welfare');
+		echo $this->Form->input('time');
+		echo $this->Form->input('holiday');
+		echo $this->Form->input('interview_title1');
+		echo $this->Form->input('interview_answer_title1');
+		echo $this->Form->input('interview_answer_detail1');
+		echo $this->Form->input('interview_title2');
+		echo $this->Form->input('interview_answer_title2');
+		echo $this->Form->input('interview_answer_detail2');
+		echo $this->Form->input('interview_title3');
+		echo $this->Form->input('interview_answer_title3');
+		echo $this->Form->input('interview_answer_detail3');
+		echo $this->Form->input('apply_howto');
+		echo $this->Form->input('employ_process');
+		echo $this->Form->input('area_code');
+		echo $this->Form->input('line_code_01');
+		echo $this->Form->input('station_code_01');
+		echo $this->Form->input('line_code_02');
+		echo $this->Form->input('station_code_02');
+		echo $this->Form->input('line_code_03');
+		echo $this->Form->input('station_code_03');
+		echo $this->Form->input('line_code_04');
+		echo $this->Form->input('station_code_04');
+		echo $this->Form->input('line_code_05');
+		echo $this->Form->input('station_code_05');
+		echo $this->Form->input('reporter_comment_title');
+		echo $this->Form->input('reporter_comment_detail');
+		echo $this->Form->input('upload_images1');
+		echo $this->Form->input('upload_images2');
+		echo $this->Form->input('upload_images3');
+		echo $this->Form->input('upload_images4');
+		echo $this->Form->input('upload_images5');
+		echo $this->Form->input('upload_images6');
+		echo $this->Form->input('upload_images7');
+		echo $this->Form->input('upload_images8');
+		echo $this->Form->input('upload_images9');
+		echo $this->Form->input('upload_images10');
+		echo $this->Form->input('upload_images11');
+		echo $this->Form->input('upload_images12');
+		echo $this->Form->input('upload_images13');
+		echo $this->Form->input('upload_images14');
+		echo $this->Form->input('upload_images15');
+		echo $this->Form->input('upload_images16');
+		echo $this->Form->input('upload_images17');
+		echo $this->Form->input('upload_images18');
+		echo $this->Form->input('upload_images19');
+		echo $this->Form->input('upload_images20');
+		echo $this->Form->input('upload_images21');
+		echo $this->Form->input('upload_images22');
+		echo $this->Form->input('upload_images_caption1');
+		echo $this->Form->input('upload_images_caption2');
+		echo $this->Form->input('upload_images_caption3');
+		echo $this->Form->input('upload_images_caption4');
+		echo $this->Form->input('upload_images_caption5');
+		echo $this->Form->input('upload_images_caption6');
+		echo $this->Form->input('upload_images_caption7');
+		echo $this->Form->input('upload_images_caption8');
+		echo $this->Form->input('upload_images_caption9');
+		echo $this->Form->input('upload_images_caption10');
+		echo $this->Form->input('upload_images_caption11');
+		echo $this->Form->input('upload_images_caption12');
+		echo $this->Form->input('upload_images_caption13');
+		echo $this->Form->input('office_name');
+		echo $this->Form->input('office_name_kana');
+		echo $this->Form->input('tantousha_name');
+		echo $this->Form->input('tel1');
+		echo $this->Form->input('tel2');
+		echo $this->Form->input('tel3');
+		echo $this->Form->input('int_title');
+		echo $this->Form->input('int_lead');
+		echo $this->Form->input('int_detail');
+		echo $this->Form->input('int_mobile_detail');
+		echo $this->Form->input('money');
+		echo $this->Form->input('gl1_title');
+		echo $this->Form->input('gl1_detail1');
+		echo $this->Form->input('gl1_detail2');
+		echo $this->Form->input('gl1_detail3');
+		echo $this->Form->input('gl1_check1');
+		echo $this->Form->input('gl1_check2');
+		echo $this->Form->input('gl2_title');
+		echo $this->Form->input('gl2_detail1');
+		echo $this->Form->input('gl2_detail2');
+		echo $this->Form->input('gl2_detail3');
+		echo $this->Form->input('gl2_check1');
+		echo $this->Form->input('gl2_check2');
+		echo $this->Form->input('gl3_title');
+		echo $this->Form->input('gl3_detail1');
+		echo $this->Form->input('gl3_detail2');
+		echo $this->Form->input('gl3_detail3');
+		echo $this->Form->input('gl3_check1');
+		echo $this->Form->input('gl3_check2');
+		echo $this->Form->input('gl4_title');
+		echo $this->Form->input('gl4_detail1');
+		echo $this->Form->input('gl4_detail2');
+		echo $this->Form->input('gl4_detail3');
+		echo $this->Form->input('gl4_check1');
+		echo $this->Form->input('gl4_check2');
+		echo $this->Form->input('gl5_title');
+		echo $this->Form->input('gl5_detail1');
+		echo $this->Form->input('gl5_detail2');
+		echo $this->Form->input('gl5_detail3');
+		echo $this->Form->input('gl5_check1');
+		echo $this->Form->input('gl5_check2');
+		echo $this->Form->input('gl6_title');
+		echo $this->Form->input('gl6_detail1');
+		echo $this->Form->input('gl6_detail2');
+		echo $this->Form->input('gl6_detail3');
+		echo $this->Form->input('gl6_check1');
+		echo $this->Form->input('gl6_check2');
+		echo $this->Form->input('gl7_title');
+		echo $this->Form->input('gl7_detail1');
+		echo $this->Form->input('gl7_detail2');
+		echo $this->Form->input('gl7_detail3');
+		echo $this->Form->input('gl7_check1');
+		echo $this->Form->input('gl7_check2');
+		echo $this->Form->input('gl8_title');
+		echo $this->Form->input('gl8_detail1');
+		echo $this->Form->input('gl8_detail2');
+		echo $this->Form->input('gl8_detail3');
+		echo $this->Form->input('gl8_check1');
+		echo $this->Form->input('gl8_check2');
+		echo $this->Form->input('map_address');
+		echo $this->Form->input('map_access');
+		echo $this->Form->input('map_work_place');
+		echo $this->Form->input('map_interview_place');
+		echo $this->Form->input('step1');
+		echo $this->Form->input('step2');
+		echo $this->Form->input('step3');
+		echo $this->Form->input('step4');
+		echo $this->Form->input('step5');
+		echo $this->Form->input('status');
+		echo $this->Form->input('start_date');
+		echo $this->Form->input('end_date');
+		echo $this->Form->input('is_invalidate');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+</div>
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<ul>
+
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('RecruitsFix.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('RecruitsFix.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('List Recruits Fixes'), array('action' => 'index')); ?></li>
+	</ul>
+</div>
