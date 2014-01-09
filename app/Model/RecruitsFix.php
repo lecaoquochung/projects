@@ -28,8 +28,11 @@ class RecruitsFix extends AppModel {
     public $actsAs = array(
         'CsvImport' => array(
             'delimiter'  => ',',
-            'hasHeader'=>false,
-            'mapHeader'=> 'HEADER_CSV_ADD_RECRUITS_FIX'
+            'hasHeader'=>true,
+            'mapHeader'=> 'HEADER_CSV_ADD_RECRUITS_FIX',
+			'max_execution_time'=>0,
+			'post_max_size'=>'64M',
+			'upload_max_filesize'=>'64M'
         ),
 	    'CsvExport' => array(
 	        'delimiter' => ',', //The delimiter for the values, default is ;

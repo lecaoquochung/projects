@@ -123,6 +123,19 @@ class CsvImportBehavior extends ModelBehavior {
  * @return mixed boolean indicating the success of the operation or list of saved records
  */
         public function importCSV(Model $Model, $file, $fixed = array(), $returnSaved = false) {
+				if (!ini_get('safe_mode') && ini_get('max_execution_time') < $this -> settings[$Model -> alias]['max_execution_time']) {
+					set_time_limit($this -> settings[$Model -> alias]['max_execution_time']);
+					//Extend timout to 6 minutes for large data exports.
+				}
+
+				if (isset($this -> settings[$Model -> alias]['upload_max_filesize'])) {
+					ini_set('upload_max_filesize',$this -> settings[$Model -> alias]['upload_max_filesize']);
+				}
+
+				if (isset($this -> settings[$Model -> alias]['post_max_size'])) {
+					ini_set('post_max_size',$this -> settings[$Model -> alias]['post_max_size']);
+				}				
+		
                 $handle = new SplFileObject($file, 'rb');
                 $header = $this->_getHeader($Model, $handle);
                 $db = $Model->getDataSource();
