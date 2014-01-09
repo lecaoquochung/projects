@@ -31,4 +31,30 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	public $components = array(
+		'Session',
+		'Cookie',
+		'Upload',
+		'Email',
+		'RequestHandler'
+	);
+	
+	public $helpers = array('Session','Form','Html','Js');
+
+	# CSV download filename
+	public function export($options = null) {
+        $this->autoRender = false;
+        $modelClass = $this->modelClass;
+        $this->response->type('Content-Type: text/csv');
+        if(isset($options['filename'])){
+            $this->response->download(strtolower($options['filename']) . '.csv');
+            unset($options['filename']);
+        }else{
+            $this->response->download(date('Y-m-d_H-i-s').'_'.strtolower(Inflector::pluralize($modelClass)) . '.csv');
+        }				
+        
+        $this->response->body($this->$modelClass->exportCSV($options));
+    }
+
 }

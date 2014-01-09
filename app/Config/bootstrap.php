@@ -105,3 +105,11 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+Configure::write('HEADER_CSV_ADD_RECRUITS_FIX', array(
+	'id' => 'id',
+    'title' => 'title',
+	'description' => 'description'
+));
+
+Configure::write('Config.language', 'jpn');

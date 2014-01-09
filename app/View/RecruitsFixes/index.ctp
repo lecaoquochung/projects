@@ -1,5 +1,7 @@
 <div class="recruitsFixes ">
 	<h2><?php echo __('Recruits Fixes'); ?></h2>
+	<?php echo $this->Html->link('Download CSV',array('controller'=>'RecruitsFixes','action'=>'download_csv')); ?>
+	<?php echo $this->Html->link('Upload CSV',array('controller'=>'RecruitsFixes','action'=>'csv')); ?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -55,18 +57,18 @@
 		$('.edit_inline').click(function(){
 			if($(this).find('#edit_inline').size()==0){
 				$(this).html('<textarea id="edit_inline" style="width:100%;height:100%">'+$(this).html()+'</textarea>');			
-				$(this).find('#edit_inline').focus().blur(function(){					
+				$(this).find('#edit_inline').focus().blur(function(){
 					var obj = $(this);
 					obj.parents('td').append('<img src="<?php echo $this->webroot ?>img/loading.gif" alt="" style="position: absolute;" />');
 					$.ajax({
 						url: "<?php echo $this->webroot ?>RecruitsFixes/edit_ajax",
-						data:{field:obj.parents('td').attr('name'),value:obj.html(),id:obj.parents('tr').attr('id')},
+						data:{field:obj.parents('td').attr('name'),value:obj.val(),id:obj.parents('tr').attr('id')},
 						type: 'post',
 						success: function(data){
 							obj.parents('td').html(obj.val());							
 						}
 					});
-				})				;				
+				});				
 			}
 		})		
 	})
