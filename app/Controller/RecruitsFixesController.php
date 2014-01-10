@@ -21,10 +21,98 @@ class RecruitsFixesController extends AppController {
  * @return void
  */
 	public function index() {
+	    set_time_limit(0);
 		$this->RecruitsFix->recursive = 0;
         $this->paginate = array('limit' => 1000, 'order' => array('id' => 'desc'),);
 		$this->set('recruitsFixes', $this->Paginator->paginate());
 	}
+    
+/**
+ * csv download method
+ *
+ * @return void
+ */
+    public function csv_download() {
+        $this->export(array(
+            'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description'),
+            #'conditions'=>array('Webmaster.company_id'=>$company_id),
+            'order' => array('RecruitsFix.id' => 'desc'),
+            #'page' => $page,
+            'mapHeader' => 'HEADER_CSV_DOWNLOAD_RECRUITSFIX',
+            'filename' => date('YmdHis').'_Chiryokanavi-db_Recruites_fix'
+        ));
+    }
+
+/**
+* csv upload method
+*
+* @return void
+*/
+    public function csv_upload($id = NULL) {
+        set_time_limit(0);
+        // $this->loadModel('Csv');
+        
+        if ($this->request->is('post')) {
+             // create the folder if it does not exist
+            if(!is_dir(WWW_ROOT.'uploads')) {
+                    mkdir(WWW_ROOT.'uploads');
+            }
+            
+            $csv = $this->Upload->uploadFile('uploads/csv',$this->request->data['RecruitsFix']['csv']);
+            // debug($csv);exit;
+            if(!empty($csv['urls'])){
+                try {
+                    //save csv to db
+                    // $tb_csv['Csv']['filename'] = $csv['name'];                  
+                    // $this->Csv->create();
+                    // $this->Csv->save($tb_csv);
+                    
+                    $recruits_fix = array();
+                    
+                    if($this->RecruitsFix->importCSV($csv['urls'],$recruits_fix)){
+                        $this->Session->setFlash( __('Import File CSV') . ' ' .$this->request->data['RecruitsFix']['csv']['name'].' ' . __('successfull.'), 'default', array('class' => 'success'));
+                    }
+                    $import_errors = $this->RecruitsFix->getImportErrors();
+                    $import_errors = Hash::extract($import_errors,"{n}.validation.url.{n}");
+                    $this->set( 'import_errors', $import_errors); 
+                } catch (Exception $e) {
+                    $import_errors = $this->RecruitsFix->getImportErrors();
+                    $import_errors = Hash::extract($import_errors,"{n}.validation.url.{n}");
+                    $this->set( 'import_errors', $import_errors );
+                    $this->Session->setFlash( __('Error Importing') .' ' .$this->request->data['RecruitsFix']['csv']['name'] . ', ' . __('column name mismatch.') );
+                    //$this->redirect( array('action'=>'import') );
+                }
+            }
+        }
+        
+        #list file csv
+        App::uses('Folder', 'Utility');
+        App::uses('File', 'Utility');          
+        $dir = new Folder('uploads/csv');
+        $files = $dir->find('.*\.csv');        
+        $this->set(compact('files'));
+        
+        
+        // $files = $this->Csv->find('all');
+        // $this->set(compact('files'));
+    }
+
+/**
+* delete csv method
+*
+* @return void
+*/
+    public function delete_csv($id = null) {
+        if(!empty($id)){
+                        $this->loadModel('Csv');
+                        $csv = $this->Csv->findById($id);                        
+                        if($this->Csv->delete($id)){
+                                $this->Upload->deleteFile('uploads/csv',$csv['Csv']['filename']);
+                                $this->Session->setFlash( __('Delete File CSV') . ' ' . $csv['Csv']['filename'].'.csv ' . __('successfull.') );                        
+                        }
+        }
+        $this->redirect($this->referer());
+    } 
 
 /**
  * view method

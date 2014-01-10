@@ -105,3 +105,18 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+// 'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description'),
+Configure::write('HEADER_CSV_DOWNLOAD_RECRUITSFIX', array(
+    'RecruitsFix.id' => 'id',
+    'RecruitsFix.name' => 'name',
+    'RecruitsFix.title' => 'title',
+    'RecruitsFix.description' => 'description'
+));
+
+Configure::write('HEADER_CSV_UPLOAD_RECRUITSFIX', array(
+    'id' => 'id',
+    'name' => 'name',
+    'title' => 'title',
+    'description' => 'description'
+));
