@@ -91,7 +91,7 @@ class CsvImportBehavior extends ModelBehavior {
                                 $headers = $this->_getCSVLine($Model, $handle);
                                 $mapHeader = Configure::read($this->settings[$Model->alias]['mapHeader']);
                                 foreach($headers as $key=>$value){
-                                        $value = mb_convert_encoding($value,'UTF-8',"SJIS");
+                                        #$value = mb_convert_encoding($value,'UTF-8',"SJIS");
                                         if(isset($mapHeader[$value]) && !empty($mapHeader[$value])){
                                                 $header[$key] = $mapHeader[$value];
                                         }else{
@@ -149,12 +149,15 @@ class CsvImportBehavior extends ModelBehavior {
                                 if (strpos($col, '.') !== false) {
                                         $keys = explode('.', $col);
                                         if (isset($keys[2])) {
-                                                $data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                #$data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                $data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8') : '';
                                         } else {
-                                                $data[$keys[0]][$keys[1]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                #$data[$keys[0]][$keys[1]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                $data[$keys[0]][$keys[1]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8') : '';
                                         }
                                 } else {
-                                        $data[$Model->alias][$col]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                        #$data[$Model->alias][$col]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                        $data[$Model->alias][$col]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8') : '';
                                 }
                         }
 

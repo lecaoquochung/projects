@@ -120,8 +120,9 @@ class RecruitsFixesController extends AppController {
 		$this->export(array(
 			//'fields' => array(),
 			//'conditions'=>array(),
+			'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description'),
 			'order' => array('RecruitsFix.id' => 'desc'),
-			'mapHeader' => 'HEADER_CSV_VIEW_RECUITSFIX',
+			'mapHeader' => 'HEADER_CSV_DOWNLOAD_RECUITSFIX',
 			'filename' => 'RecruitsFix_'.date('Y-m-d-H-i-s')
 		));				
 		

@@ -106,10 +106,18 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-Configure::write('HEADER_CSV_ADD_RECRUITS_FIX', array(
-	'id' => 'id',
+Configure::write('HEADER_CSV_DOWNLOAD_RECRUITS_FIX', array(
+	'RecruitsFix.id' => 'id',
+	'RecruitsFix.name' => 'name',
+    'RecruitsFix.title' => 'title',
+	'RecruitsFix.description' => 'description'
+));
+
+Configure::write('HEADER_CSV_UPLOAD_RECRUITS_FIX', array(
+    'id' => 'id',
+    'name' => 'name',
     'title' => 'title',
-	'description' => 'description'
+    'description' => 'description'
 ));
 
 Configure::write('Config.language', 'jpn');
