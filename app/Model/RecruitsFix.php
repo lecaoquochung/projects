@@ -29,7 +29,7 @@ class RecruitsFix extends AppModel {
         'CsvImport' => array(
             'delimiter'  => ',',
             'hasHeader'=>true,
-            'mapHeader'=> 'HEADER_CSV_ADD_RECRUITS_FIX',
+            'mapHeader'=> 'HEADER_CSV_UPLOAD_RECRUITS_FIX',
 			'max_execution_time'=>0,
 			'post_max_size'=>'64M',
 			'upload_max_filesize'=>'64M'
