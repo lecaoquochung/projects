@@ -149,19 +149,21 @@ class CsvImportBehavior extends ModelBehavior {
                                 if (strpos($col, '.') !== false) {
                                         $keys = explode('.', $col);
                                         if (isset($keys[2])) {
-                                                $data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                $data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"EUC-JP, UTF-8, ASCII, JIS, eucjp-win, sjis-win") : '';
                                         } else {
-                                                $data[$keys[0]][$keys[1]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                                $data[$keys[0]][$keys[1]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"EUC-JP, UTF-8, ASCII, JIS, eucjp-win, sjis-win") : '';
                                         }
                                 } else {
-                                        $data[$Model->alias][$col]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"SJIS") : '';
+                                        $data[$Model->alias][$col]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"EUC-JP, UTF-8, ASCII, JIS, eucjp-win, sjis-win") : '';
                                 }
                         }
 
-                        $data = Set::merge($data, $fixed);
-                        $Model->create();
-                        $Model->id = isset($data[$Model->alias][$Model->primaryKey]) ? $data[$Model->alias][$Model->primaryKey] : false;
-
+                        $data = Set::merge($data, $fixed);                        
+                        $Model->id = isset($data[$Model->alias]['﻿id']) ? intval($data[$Model->alias]['﻿id']) : false;
+						if($Model->id==false){
+							$Model->create();
+						}
+						
                         //beforeImport callback
                         if (method_exists($Model, 'beforeImport')) {
                                 $data = $Model->beforeImport($data);
@@ -179,12 +181,20 @@ class CsvImportBehavior extends ModelBehavior {
 							$error = true;
 						}
 						
-                        // save the row
-                        if (!$error && !$Model->saveAll($data, array('validate' => false,'atomic' => false))) {
-                                $this->errors[$Model->alias][$i]['save'] = sprintf(__d('utils', '%s for Row %d failed to save.'), $Model->alias, $i);
-                                $error = true;
-                                $this->_notify($Model, 'onImportError', $this->errors[$Model->alias][$i]);
-                        }
+						if($Model->id==false){
+							// save the row
+							if (!$error && !$Model->saveAll($data, array('validate' => false,'atomic' => false))) {
+									$this->errors[$Model->alias][$i]['save'] = sprintf(__d('utils', '%s for Row %d failed to save.'), $Model->alias, $i);
+									$error = true;
+									$this->_notify($Model, 'onImportError', $this->errors[$Model->alias][$i]);
+							}
+						}else{					
+							if (!$error && !$Model->save($data)) {
+									$this->errors[$Model->alias][$i]['save'] = sprintf(__d('utils', '%s for Row %d failed to save.'), $Model->alias, $i);
+									$error = true;
+									$this->_notify($Model, 'onImportError', $this->errors[$Model->alias][$i]);
+							}
+						}
 
                         //afterImport callback
                         $data[$Model->alias]['id'] = $Model->id;
