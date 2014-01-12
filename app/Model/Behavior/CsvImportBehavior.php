@@ -86,9 +86,15 @@ class CsvImportBehavior extends ModelBehavior {
         protected function _getHeader(Model $Model, SplFileObject $handle) {
                 if ($this->settings[$Model->alias]['hasHeader'] === true) {
                         $header = $this->_getCSVLine($Model, $handle);
+						if(count($header)==1){
+							$header = explode(',',$header[0]);
+						}						
                 } else {
                         if(!empty($this->settings[$Model->alias]['mapHeader']) && Configure::read($this->settings[$Model->alias]['mapHeader'])){
                                 $headers = $this->_getCSVLine($Model, $handle);
+								if(count($headers)==1){
+									$headers = explode(',',$headers[0]);
+								}								
                                 $mapHeader = Configure::read($this->settings[$Model->alias]['mapHeader']);
                                 foreach($headers as $key=>$value){
                                         #$value = mb_convert_encoding($value,'UTF-8',"SJIS");
@@ -143,10 +149,13 @@ class CsvImportBehavior extends ModelBehavior {
                 $saved = array();
                 $i = 0;
                 while (($row = $this->_getCSVLine($Model, $handle)) !== false) {
-                        $data = array();
+						if(count($row)==1){
+							$row = explode(',',$row[0]);
+						}						
+                        $data = array();						
                         foreach ($header as $k => $col) {
                                 // get the data field from Model.field
-                                if (strpos($col, '.') !== false) {
+                                if (strpos($col, '.') !== false) {								
                                         $keys = explode('.', $col);
                                         if (isset($keys[2])) {
                                                 $data[$keys[0]][$keys[1]][$keys[2]]= (isset($row[$k])) ? mb_convert_encoding($row[$k],'UTF-8',"EUC-JP, UTF-8, ASCII, JIS, eucjp-win, sjis-win") : '';
@@ -158,8 +167,8 @@ class CsvImportBehavior extends ModelBehavior {
                                 }
                         }
 
-                        $data = Set::merge($data, $fixed);           
-                        $Model->id = isset($data[$Model->alias]['﻿id']) ? intval($data[$Model->alias]['﻿id']) : false;
+                        $data = Set::merge($data, $fixed);
+                        $Model->id = isset($data[$Model->alias]['id']) ? intval($data[$Model->alias]['id']) : false;
 						if($Model->id==false){
 							$Model->create();
 						}
