@@ -115,7 +115,7 @@ class CsvImportBehavior extends ModelBehavior {
                                 $header = array_keys($Model->schema());
                         }
                 }	
-				if($header[0]=='ï»¿id') $header[0]='id';				
+				if($header[0]=='﻿id') $header[0]='id';				
                 return $header;
         }
 
