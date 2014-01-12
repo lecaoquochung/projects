@@ -158,8 +158,8 @@ class CsvImportBehavior extends ModelBehavior {
                                 }
                         }
 
-                        $data = Set::merge($data, $fixed);                        
-                        $Model->id = isset($data[$Model->alias]['?id']) ? intval($data[$Model->alias]['?id']) : false;
+                        $data = Set::merge($data, $fixed);           
+                        $Model->id = isset($data[$Model->alias]['﻿id']) ? intval($data[$Model->alias]['﻿id']) : false;
 						if($Model->id==false){
 							$Model->create();
 						}
