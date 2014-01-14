@@ -27,7 +27,7 @@ class RecruitsFix extends AppModel {
  */    
     public $actsAs = array(
         'CsvImport' => array(
-            'delimiter'  => ',', //serevr is comment out
+            // 'delimiter'  => ',', //serevr is comment out
             'hasHeader'=>true,
             'mapHeader'=> 'HEADER_CSV_UPLOAD_RECRUITS_FIX',
 			'max_execution_time'=>0,

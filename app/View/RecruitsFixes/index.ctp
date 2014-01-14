@@ -8,6 +8,7 @@
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
 			<th><?php echo $this->Paginator->sort('description'); ?></th>
+			<th><?php echo $this->Paginator->sort('office_name'); ?></th>
 			<!-- <th><?php echo $this->Paginator->sort('intro_title'); ?></th>
 			<th><?php echo $this->Paginator->sort('intro_detail'); ?></th>
 			<th><?php echo $this->Paginator->sort('office_name'); ?></th>
@@ -20,6 +21,7 @@
 		<td class="edit_inline" name="name" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['name']); ?></td>
 		<td class="edit_inline" name="title" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['title']); ?></td>
 		<td class="edit_inline" name="description" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['description']); ?></td>
+		<td class="edit_inline" name="description" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['office_name']); ?></td>
 		<!-- <td class="edit_inline" name="intro_title" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['intro_title']); ?></td>
 		<td class="edit_inline" name="intro_detail" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['intro_detail']); ?></td>
 		<td class="edit_inline" name="office_name" style="position:relative"><?php echo h($recruitsFix['RecruitsFix']['office_name']); ?></td>

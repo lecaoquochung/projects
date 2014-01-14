@@ -110,14 +110,16 @@ Configure::write('HEADER_CSV_DOWNLOAD_RECRUITS_FIX', array(
 	'RecruitsFix.id' => 'id',
 	'RecruitsFix.name' => 'name',
     'RecruitsFix.title' => 'title',
-	'RecruitsFix.description' => 'description'
+	'RecruitsFix.description' => 'description',
+	'RecruitsFix.office_name' => 'office_name'
 ));
 
 Configure::write('HEADER_CSV_UPLOAD_RECRUITS_FIX', array(
     'id' => 'id',
     'name' => 'name',
     'title' => 'title',
-    'description' => 'description'
+    'description' => 'description',
+    'office_name' => 'office_name'
 ));
 
 Configure::write('Config.language', 'jpn');
