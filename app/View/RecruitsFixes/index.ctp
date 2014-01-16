@@ -2,6 +2,9 @@
 	<h2><?php echo __('Recruits Fixes'); ?></h2>
 	<?php echo $this->Html->link('Download CSV',array('controller'=>'RecruitsFixes','action'=>'download_csv')); ?>
 	<?php echo $this->Html->link('Upload CSV',array('controller'=>'RecruitsFixes','action'=>'csv')); ?>
+	
+	<?php echo $this->Html->link('Download CSV Full',array('controller'=>'RecruitsFixes','action'=>'download_csv','full')); ?>
+	<?php echo $this->Html->link('Upload CSV Full',array('controller'=>'RecruitsFixes','action'=>'csv','full')); ?>	
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>

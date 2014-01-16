@@ -115,20 +115,26 @@ class RecruitsFixesController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 	
-	public function download_csv(){
+	public function download_csv($full = false){
 		$this->RecruitsFix->recursive = 0;
-		$this->export(array(
-			//'fields' => array(),
-			//'conditions'=>array(),
-			'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description', 'RecruitsFix.office_name'),
-			'order' => array('RecruitsFix.id' => 'desc'),
-			'mapHeader' => 'HEADER_CSV_DOWNLOAD_RECUITSFIX',
-			'filename' => 'RecruitsFix_'.date('Y-m-d-H-i-s')
-		));				
-		
+		if($full==false){
+			$this->export(array(
+				//'fields' => array(),
+				//'conditions'=>array(),
+				'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description', 'RecruitsFix.office_name'),
+				'order' => array('RecruitsFix.id' => 'desc'),
+				'mapHeader' => 'HEADER_CSV_DOWNLOAD_RECUITSFIX',
+				'filename' => 'RecruitsFix_'.date('Y-m-d-H-i-s')
+			));
+		}else{
+			$this->export(array(
+				'order' => array('RecruitsFix.id' => 'desc'),
+				'filename' => 'RecruitsFix_'.date('Y-m-d-H-i-s')
+			));			
+		}		
 	}
 	
-	public function csv($id = NULL) {
+	public function csv($id = NULL, $full = false) {
 		set_time_limit(0);
 		$this->loadModel('Csv');
         if ($this->request->is('post')) {			
@@ -146,9 +152,12 @@ class RecruitsFixesController extends AppController {
 					
                     $recruits_fix = array();
 					
-                    if($this->RecruitsFix->importCSV($csv['urls'],$recruits_fix)){
+                    if($this->RecruitsFix->importCSV($csv['urls'],$recruits_fix,false,array(
+						'delimiter'  => ',', //serevr is comment out
+						'hasHeader'=>false,					
+					))){
 						$this->Session->setFlash( __('Import File CSV') . ' ' . $this->request->data['RecruitsFix']['csv']['name'].' ' . __('successfull.')  );
-                    }                    
+                    }
                     $import_errors = $this->RecruitsFix->getImportErrors();
 					$import_errors = Hash::extract($import_errors,"{n}.validation.url.{n}");
                     $this->set( 'import_errors', $import_errors);					

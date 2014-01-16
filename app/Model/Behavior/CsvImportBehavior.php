@@ -129,7 +129,7 @@ class CsvImportBehavior extends ModelBehavior {
  * @throws RuntimeException if $file does not exists
  * @return mixed boolean indicating the success of the operation or list of saved records
  */
-        public function importCSV(Model $Model, $file, $fixed = array(), $returnSaved = false) {
+        public function importCSV(Model $Model, $file, $fixed = array(), $returnSaved = false, $settings = array()) {
 				if (!ini_get('safe_mode') && ini_get('max_execution_time') < $this -> settings[$Model -> alias]['max_execution_time']) {
 					set_time_limit($this -> settings[$Model -> alias]['max_execution_time']);
 					//Extend timout to 6 minutes for large data exports.
@@ -143,13 +143,17 @@ class CsvImportBehavior extends ModelBehavior {
 					ini_set('post_max_size',$this -> settings[$Model -> alias]['post_max_size']);
 				}				
 		
+				if(count($settings)>0){
+					$this->settings[$Model->alias] = array_merge($this->settings[$Model -> alias], $settings);
+				}	
+		
                 $handle = new SplFileObject($file, 'rb');
                 $header = $this->_getHeader($Model, $handle);
                 $db = $Model->getDataSource();
                 $db->begin($Model);
                 $saved = array();
                 $i = 0;
-                while (($row = $this->_getCSVLine($Model, $handle)) !== false) {
+                while (($row = $this->_getCSVLine($Model, $handle)) !== false) {					
 						if(count($row)==1){
 							$row = explode(',',$row[0]);
 						}						
@@ -169,6 +173,7 @@ class CsvImportBehavior extends ModelBehavior {
                         }
 
                         $data = Set::merge($data, $fixed);
+
                         $Model->id = isset($data[$Model->alias]['id']) ? intval($data[$Model->alias]['id']) : false;
 						if($Model->id==false){
 							$Model->create();
