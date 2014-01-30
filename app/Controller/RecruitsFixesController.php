@@ -22,7 +22,9 @@ class RecruitsFixesController extends AppController {
  */
 	public function index() {
 		$this->RecruitsFix->recursive = 0;
-        $this->paginate = array('limit' => 1000, 'order' => array('id' => 'desc'),);
+		$conds = array();
+		$conds['RecruitsFix.is_invalidate'] = 0;
+		$this->paginate = array('limit' => 1000, 'order' => array('id' => 'desc'), 'conditions' => $conds);
 		$this->set('recruitsFixes', $this->Paginator->paginate());
 	}
 
@@ -117,9 +119,10 @@ class RecruitsFixesController extends AppController {
 	
 	public function download_csv(){
 		$this->RecruitsFix->recursive = 0;
+		$conds = array();
+		$conds['RecruitsFix.is_invalidate'] = 0;
 		$this->export(array(
-			//'fields' => array(),
-			//'conditions'=>array(),
+			'conditions' => $conds,
 			'fields' => array('RecruitsFix.id', 'RecruitsFix.name', 'RecruitsFix.title', 'RecruitsFix.description', 'RecruitsFix.office_name'),
 			'order' => array('RecruitsFix.id' => 'desc'),
 			'mapHeader' => 'HEADER_CSV_DOWNLOAD_RECUITSFIX',
